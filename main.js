@@ -4,7 +4,8 @@ var app = new Vue({
         product: 'Socks',
         image: './assets/vmSocks-green.jpg',
         link: 'https://www.amazon.com/s?k=socks&ref=nb_sb_noss',
-        inventory: 100,
+        inStock: false,
+        inventory: 0,
         onSale: true,
         details: ["80% cotton", "20% polyester", "Gender-neutral"],
         variants: [{
