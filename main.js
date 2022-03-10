@@ -50,9 +50,7 @@ Vue.component('product', {
 
         <button @click="removeFromCart">Remove From Cart</button>
 
-        <div class="cart">
-            <p>Cart({{ cart }})</p>
-        </div>
+        
 
     </div>
 
@@ -84,15 +82,16 @@ Vue.component('product', {
         }
     },
     methods: {
-        addToCart() {
-            this.cart += 1
+        addToCart: function () {
+            this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId)
+        },
+        removeFromCart: function () {
+            this.$emit('remove-from-cart', this.variants[this.selectedVariant].variantId)
+
         },
         updateProduct(index) {
             this.selectedVariant = index
             console.log(index)
-        },
-        removeFromCart() {
-            this.cart -= 1
         }
     },
     computed: {
@@ -124,7 +123,20 @@ Vue.component('product', {
 var app = new Vue({
     el: '#app',
     data: {
-        premium: true
+        premium: true,
+        cart: []
+    },
+    methods: {
+        updateCart(id) {
+            this.cart.push(id)
+        },
+        removeItem(id) {
+            for (var i = this.cart.length - 1; i >= 0; i--) {
+                if (this.cart[i] === id) {
+                    this.cart.splice(i, 1);
+                }
+            }
+        }
     }
 
 })
