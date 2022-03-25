@@ -1,0 +1,20 @@
+version: '3'
+volumes:
+  db-volume:
+services:
+  app:
+    build: .
+    volumes:
+      - ./app:/var/www/html/app
+    ports:
+      - 8081:8081
+      - 3000:3000
+  db:
+    image: postgres:11-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - db-volume:/var/lib/postgresql/data
+    ports:
+      - 5434:5432
