@@ -1,5 +1,10 @@
+import {
+    OK
+} from '../util'
+
 const state = {
-    user: null
+    user: null,
+    apiStatus: null
 }
 
 const getters = {
@@ -10,6 +15,10 @@ const getters = {
 const mutations = {
     setUser(state, user) {
         state.user = user
+    },
+
+    setApiStatus(state, status) {
+        state.apiStatus = status
     }
 }
 
@@ -20,8 +29,20 @@ const actions = {
     },
 
     async login(context, data) {
+        context.commit('setApiStatus', null)
         const response = await axios.post('/api/login', data)
-        context.commit('setUser', response.data)
+            .catch(err => err.response || err)
+
+        if (response.status === OK) {
+            context.commit('setApiStatus', true)
+            context.commit('setUser', response.data)
+            return false
+        }
+
+        context.commit('setApiStatus', false)
+        context.commit('error/setCode', response.status, {
+            root: true
+        })
     },
 
     async logout(context) {
