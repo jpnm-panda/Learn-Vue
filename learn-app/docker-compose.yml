@@ -2,10 +2,10 @@ version: '3'
 volumes:
   db-volume:
 services:
-  app:
+  laravel:
     build: .
     volumes:
-      - ./app:/var/www/html/app
+      - ./laravel:/var/www/html/laravel
     ports:
       - 8081:8081
       - 3000:3000
