@@ -22,6 +22,6 @@
         "vue": "^2.6.14",
         "vue-router": "^3.5.3",
         "vue-template-compiler": "^2.6.11",
-        "vuex": "^4.0.2"
+        "vuex": "^3.6.2"
     }
 }
