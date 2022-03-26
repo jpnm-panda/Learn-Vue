@@ -13,4 +13,4 @@ RUN apt-get update \
   && /install-composer.sh \
   && mv composer.phar /usr/local/bin/composer
 
-WORKDIR /var/www/html/app
+WORKDIR /var/www/html/laravel
